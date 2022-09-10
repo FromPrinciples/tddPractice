@@ -100,4 +100,29 @@ public class multiplication {
         assertEquals(Money.dollar(10), result);
     }
 
+    public void SumPlusMoney(){
+        tdd.Expression fivebucks = Money.dollar(5);
+        tdd.Expression tenFrancs = Money.franc(10);
+        Bank bank = new Bank();
+        bank.addRate("CHF","USD",2);
+        tdd.Expression sum = new Sum(fivebucks, tenFrancs).plus(fivebucks);
+        Money result = bank.reduce(sum, "USD");
+        assertEquals(Money.dollar(15),result);
+    }
+
+    public void testSumTimew(){
+        tdd.Expression fiveBucks = Money.dollar(5);
+        tdd.Expression tenFrancs = Money.dollar(10);
+        Bank bank = new Bank();
+        bank.addRate("CHF","USD",2);
+        new Sum(fiveBucks, tenFrancs).times(2);
+        Money result = bank.reduce(sum, "USD");
+        assertEquals(Money.dollar(20), result);
+    }
+
+    public void testPlusSameCurrencyReturnsMoney(){
+        tdd.Expression sum = Money.dollar(1).plus(Money.dollar(1));
+        assertTrue(sum instanceof Money);
+    }
+
 }
