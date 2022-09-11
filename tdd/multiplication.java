@@ -3,11 +3,16 @@ package tdd;
 //import org.assertj.core.api.Assertions;
 
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.expression.Expression;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -124,5 +129,95 @@ public class multiplication {
         tdd.Expression sum = Money.dollar(1).plus(Money.dollar(1));
         assertTrue(sum instanceof Money);
     }
+
+    public void testFileSystemError(){
+        FullFile foo = new FullFile("foo");
+        try {
+            saveAs(foo);
+            fail();
+        }catch (IOException e){
+
+        }
+    }
+
+    public void testFileSystemError() {
+        File foo = new File("foo") {
+            public boolean createNewFile() throws IOException {
+                throw new IOException();
+            }
+        };
+        try {
+            saveAs(foo);
+            fail();
+        } catch (IOException e) {
+        }
+    }
+    public MyDate yesterday(){
+        return new MyDate(this.days()-1);
+    }
+
+    public void testSum(){
+        assertEquals(4,plus(3,1));
+    }
+    private int plus(int augend, int addend){
+        return 4;
+    }
+
+    public void testSum(){
+        assertEquals(4, plus(3, 1));
+        assertEquals(7,plus(3,4));
+        assertEquals(5, sum(5));
+        assertEquals(5, sum(5, new int[] {5}));
+        assertEquals(5, sum(new int[] {5}));
+        assertEquals(12, sum(new int[] {5,7}));
+    }
+
+    private int plus(int augend, int addend){
+        return augend + addend;
+    }
+
+    private int sum(int value, int[] values) {
+        int sum = 0;
+        for (int i = 0; i<values.length; i++)
+            sum += values[i];
+        return value;
+    }
+
+    public void testEmpty(){
+        Rectangle empty = new Rectangle(0, 0, 0, 0);
+        assertTrue(empty.isEmpty());
+    }
+    public void testWidth(){
+        Rectangle empty = new Rectangle(0, 0, 0, 0);
+        assertEquals(0,0, empty.getWidth(), 0.0);
+    }
+
+    public void testRate(){
+        exchange.addRate("USD", "GBP", 2);
+        int rate = exchange.findRate("USD","GBP");
+        Assertions.assertEquals(2, rate);
+    }
+
+    public void testMissingRate(){
+        try{
+            exchange.findRate"USD", "GBP");
+            fail();
+        }catch (IllegalArgumentException expected){
+
+        }
+    }
+
+    public boolean setReadOnly(){
+        SecurityManager guard = System.getSecurityManager();
+        if(guard != null){
+            guard.canWrite(path);
+        }guard.canWrite(path);
+        return fileSystem.setReadOnly(this);
+    }
+
+    public static SecurityManager getSecurityManager(){
+        return security == null ? new LaxSecurity() : security;
+    }
+
 
 }
