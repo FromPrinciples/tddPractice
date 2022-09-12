@@ -31,8 +31,8 @@ class Money {
     }
 //    abstract Money times(int multiplier);
 
-    static Money dollar(int amount){
-        return new Dollar(amount,"USD");
+    static Dollar dollar(int amount){
+        return new Dollar(amount);
     }
     static Money franc(int amount){
         return new Franc(amount, "CHF");
@@ -101,6 +101,11 @@ class Money {
         Database database = new MockDatabase();
         database.exceptQuery("select order_no from Order where cust_no is 123");
         database.returnResult(new String[] {"Order 2", "Order 3"});
+    }
+
+    testRectangle(){
+        Drawing drawing = new Drawing();
+
     }
 
 }

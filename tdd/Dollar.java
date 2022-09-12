@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class Dollar extends Money{
     int amount;
     private String currency;
-    public Dollar(int amount, String currency) {
+    public Dollar(int amount) {
         super(amount, currency);
     }
 

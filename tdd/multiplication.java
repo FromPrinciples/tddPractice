@@ -21,9 +21,9 @@ import static org.junit.jupiter.api.Assertions.*;
 public class multiplication {
     @Test
     public void testMultiplication(){
-        Money five = Money.dollar(5);
-        assertEquals(Money.dollar(10), five.times(2));
-        assertEquals(Money.dollar(15), five.times(3));
+        Dollar five = Money.dollar(5);
+        assertEquals(new Dollar(10), five.times(2));
+        assertEquals(new Dollar(15), five.times(3));
     }
 
     public void testEquality(){
@@ -217,6 +217,79 @@ public class multiplication {
 
     public static SecurityManager getSecurityManager(){
         return security == null ? new LaxSecurity() : security;
+    }
+
+    assertEqual(new MyDate("28.02"), new MyDate("1.3.02")yesterday());
+
+    public void testSum(){
+        assertEquals(4, plus(3,1));
+        assertEquals(7, plus(3,4));
+        assertEquals(5, sum(5));
+        assertEquals(5, sum(5, new int[] {5}));
+        assertEquals(12, sum(new int[] {5,7}));
+    }
+    private int plus(int augend, int addend){
+        return augend + addend;
+    }
+    private int sum(int value, int[] values){
+        int sum=0;
+        for (int i=0; i<values.length; i++)
+            sum += values[i];
+        return value;
+    }
+    private Rectangle empty;
+
+    public void testEmpty(){
+        Rectangle empty = new Rectangle(0, 0, 0, 0);
+        assertEquals(0.0, empty.getWidth(), 0.0);
+    }
+
+    public void setUp(){
+        empty = new Rectangle(0,0,0,0)
+    }
+    public void testEmpty(){
+        assertTrue(empty.isEmpty());
+    }
+    public void testWidth(){
+        assertEquals(0.0, empty.getWidth(), 0.0);
+    }
+    public void testRate(){
+        exchange.addRate("USD","GBP",2);
+        int rate = exchange.findRate("USD","GBP");
+        assertEquals(2, rate);
+    }
+    public void testMissingRate(){
+        try{
+            exchange.findRate("USD", "GBP");
+            fail();
+        }catch (IllegalArgumentException expected){
+
+        }
+    }
+    void testSumPrinting() {
+        Sum sum = new Sum(Money.dollar(5), Money.franc(7));
+        assertEquals("5 USD + 7 CHF", sum.toString());
+    }
+    public String toString() {
+        IndentingStream writer = new IndentingStream();
+        toString(writer);
+        return writer.contents();
+    }
+    void toString(IndentingWriter writer){
+        writer.println("+");
+        writer.indent();
+        augend.toString(writer);
+        writer.println();
+        addend.toString(writer);
+        writer.exdent();
+    }
+
+    public void testSimpleAddition() {
+        Money five = Money.dollar(5);
+        tdd.Expression sum = five.plus(five);
+        Bank bank = new Bank();
+        Money reduced = sum.reduce(sum, "USD");
+        assertEquals(Money.dollar(10), reduced);
     }
 
 
