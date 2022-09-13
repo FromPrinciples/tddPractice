@@ -1,10 +1,12 @@
 package tdd;
 
+import java.awt.*;
+
 import static sun.tools.tree.Statement.empty;
 
 public class EmptyRectangleTest {
     public void setUp(){
-        Reactangle empty = new Reactangle(0, 0, 0, 0);
+        Rectangle empty = new Rectangle(0, 0, 0, 0);
     }
 
     public void testEmpty(){

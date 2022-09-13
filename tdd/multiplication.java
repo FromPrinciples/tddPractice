@@ -15,6 +15,7 @@ import java.io.File;
 import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static sun.jvm.hotspot.HelloWorld.fib;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -292,6 +293,21 @@ public class multiplication {
         Money reduced = sum.reduce(sum, "USD");
         assertEquals(Money.dollar(10), reduced);
     }
+
+    public void testFibonacci(){
+        int cases[][] = {{0,0},{1,1},{2,1},{3,2}};
+        for (int i=0; i< cases.length; i++)
+            assertEquals(cases[i][1], fib(cases[i][0]));
+            assertEquals(0, fib(0));
+            assertEquals(1,fib(1));
+    }
+
+    int fib(int n){
+        if (n==0) return 0;
+        if (n<=2) return 1;
+        return fib(n-1) + fib(n-2);
+    }
+
 
 
 }
