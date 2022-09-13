@@ -227,6 +227,7 @@ public class multiplication {
         assertEquals(5, sum(5));
         assertEquals(5, sum(5, new int[] {5}));
         assertEquals(12, sum(new int[] {5,7}));
+
     }
     private int plus(int augend, int addend){
         return augend + addend;
